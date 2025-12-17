@@ -1,0 +1,28 @@
+4. box plot
+library(ggplot2)
+max_y <- 30
+box_plot <- ggplot(data, aes(x = Category, y = number_of_days_from_publish_date_to_trending_date)) +
+     geom_boxplot(fill = "skyblue", color = "black", outlier.shape = NA) +  # Box plot with blue fill and black border, excluding outliers
+     labs(title = "Time to Trending by Video Category on YouTube",
+          x = "Category",
+          y = "Number of days used to achieve trending video") +  # Set title and axis labels
+     theme_minimal() +  # Apply a minimal theme (optional)
+     theme(axis.text.x = element_text(angle = 45, hjust = 1)) +  # Rotate x-axis labels for better readability
+     coord_cartesian(ylim = c(0, max_y)) 
+box_plot
+
+
+1. scatter plot
+library(ggplot2)
+library(scales)
+scatter_plot <- ggplot(data, aes(x = views)) +
+     geom_point(aes(y = likes, color = "Likes")) +  # Scatter plot for likes
+     geom_point(aes(y = dislikes, color = "Dislikes")) +  # Scatter plot for dislikes
+     scale_color_manual(values = c("Likes" = "blue", "Dislikes" = "red"), name = "Type", labels = c("Dislikes", "Likes")) +  # Manual color assignment
+     labs(title = "Relationship between Views and Likes/Dislikes on YouTube Videos",
+          x = "Views", y = "Likes/Dislikes") +  # Set title and axis labels
+     theme_minimal() +  # Apply a minimal theme (optional)
+     theme(legend.position = "right") +  # Adjust legend position
+     scale_x_continuous(labels = comma_format()) +  # Format x-axis labels
+     scale_y_continuous(labels = comma_format()) 
+scatter_plot
